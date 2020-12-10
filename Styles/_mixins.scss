@@ -1,0 +1,9 @@
+@mixin flex($justify-content,$align-items) {
+    display: flex;
+    justify-content: $justify-content;
+    align-items:$align-items;
+}
+@mixin grid($columns,$rows) {
+    display: grid;
+    grid-template: $rows / $columns;
+}

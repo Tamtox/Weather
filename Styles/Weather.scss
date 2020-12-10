@@ -1,0 +1,49 @@
+@import 'mixins';
+*{
+    box-sizing: border-box;
+}
+html{
+    font-size: 100%;
+}
+#wrapper{
+    height: 100vh;
+    background: url('./Images/Main.jpg') fixed no-repeat ;
+    background-size: cover;
+    padding-top: 1%;
+    header{
+        height: 7%; 
+        font-size: 1.7rem;
+        text-align: center;
+        #search{
+            @include flex(center,center);
+            #city{
+                opacity: 50%;
+            }
+        }
+    }
+    main{
+        height: 93%;
+        @include flex(center,center);
+        #info{
+            height: 80%;
+            width: 70%;
+            @include grid(repeat(20,5%),repeat(10,10%));
+            margin: auto;
+            background-color: rgba(240, 248, 255, 0.2);
+            border-radius: 10px;
+            box-shadow: 0 0 15px black;
+            font-size: 2rem;
+            #time{
+                @include flex(center,center);
+                grid-area: 1 / 1 / span 2 / span 5 ;
+            }
+            #city-name{
+
+            }
+        }
+    }
+    footer{
+        @include flex(end,center)
+    }
+}
+@import 'media-queries';

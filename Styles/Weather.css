@@ -1,0 +1,142 @@
+* {
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+}
+
+html {
+  font-size: 100%;
+}
+
+#wrapper {
+  height: 100vh;
+  background: url("./Images/Main.jpg") fixed no-repeat;
+  background-size: cover;
+  padding-top: 1%;
+}
+
+#wrapper header {
+  height: 7%;
+  font-size: 1.7rem;
+  text-align: center;
+}
+
+#wrapper header #search {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+#wrapper header #search #city {
+  opacity: 50%;
+}
+
+#wrapper main {
+  height: 93%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+#wrapper main #info {
+  height: 80%;
+  width: 70%;
+  display: -ms-grid;
+  display: grid;
+  -ms-grid-rows: (10%)[10];
+  -ms-grid-columns: (5%)[20];
+      grid-template: repeat(10, 10%)/repeat(20, 5%);
+  margin: auto;
+  background-color: rgba(240, 248, 255, 0.2);
+  border-radius: 10px;
+  -webkit-box-shadow: 0 0 15px black;
+          box-shadow: 0 0 15px black;
+  font-size: 2rem;
+}
+
+#wrapper main #info #time {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -ms-grid-row: 1;
+  -ms-grid-row-span: 2;
+  -ms-grid-column: 1;
+  -ms-grid-column-span: 5;
+  grid-area: 1 / 1 / span 2 / span 5;
+}
+
+#wrapper footer {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: end;
+      -ms-flex-pack: end;
+          justify-content: end;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+@media only screen and (min-width: 320px) and (max-width: 600px) {
+  html {
+    font-size: 80%;
+  }
+  #wrapper main #info {
+    height: 80%;
+    width: 90%;
+  }
+}
+
+@media only screen and (min-width: 600px) and (max-width: 768px) {
+  html {
+    font-size: 80%;
+  }
+  #wrapper main #info {
+    height: 80%;
+    width: 85%;
+  }
+}
+
+@media only screen and (min-width: 768px) and (max-width: 992px) {
+  html {
+    font-size: 85%;
+  }
+  #wrapper main #info {
+    height: 80%;
+    width: 80%;
+  }
+}
+
+@media only screen and (min-width: 992px) and (max-width: 1200px) {
+  html {
+    font-size: 90%;
+  }
+  #wrapper main #info {
+    height: 80%;
+    width: 75%;
+  }
+}
+
+@media only screen and (min-width: 1200px) and (max-width: 1600px) {
+  html {
+    font-size: 100%;
+  }
+}
+/*# sourceMappingURL=Weather.css.map */
