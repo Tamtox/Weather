@@ -21,19 +21,39 @@ html {
 }
 
 #wrapper header #search {
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-pack: center;
-      -ms-flex-pack: center;
-          justify-content: center;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
+  display: -ms-grid;
+  display: grid;
+  -ms-grid-rows: (50%)[2];
+  -ms-grid-columns: (10%)[10];
+      grid-template: repeat(2, 50%)/repeat(10, 10%);
+  width: 60%;
+  margin: auto;
 }
 
 #wrapper header #search #city {
   opacity: 50%;
+  -ms-grid-row: 1;
+  -ms-grid-row-span: 1;
+  -ms-grid-column: 3;
+  -ms-grid-column-span: 4;
+  grid-area: 1 / 3 / span 1 / span 4;
+}
+
+#wrapper header #search #country {
+  -ms-grid-row: 2;
+  -ms-grid-row-span: 1;
+  -ms-grid-column: 3;
+  -ms-grid-column-span: 6;
+  grid-area: 2 /3 / span 1 / span 6;
+  font-size: 1.3rem;
+}
+
+#wrapper header #search #city-button {
+  -ms-grid-row: 1;
+  -ms-grid-row-span: 1;
+  -ms-grid-column: 7;
+  -ms-grid-column-span: 2;
+  grid-area: 1/ 7 / span 1 / span 2;
 }
 
 #wrapper main {
@@ -82,6 +102,158 @@ html {
   grid-area: 1 / 1 / span 2 / span 5;
 }
 
+#wrapper main #info #city-name {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  font-size: 3rem;
+  -ms-grid-row: 1;
+  -ms-grid-row-span: 2;
+  -ms-grid-column: 6;
+  -ms-grid-column-span: 10;
+  grid-area: 1 / 6 / span 2 / span 10;
+}
+
+#wrapper main #info #date {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -ms-grid-row: 1;
+  -ms-grid-row-span: 2;
+  -ms-grid-column: 16;
+  -ms-grid-column-span: 5;
+  grid-area: 1 / 16 / span 2 / span 5;
+}
+
+#wrapper main #info #temperature {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -ms-grid-row: 4;
+  -ms-grid-row-span: 4;
+  -ms-grid-column: 9;
+  -ms-grid-column-span: 4;
+  grid-area: 4 / 9 / span 4 / span 4;
+  font-size: 7rem;
+}
+
+#wrapper main #info #description {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -ms-grid-row: 7;
+  -ms-grid-row-span: 4;
+  -ms-grid-column: 9;
+  -ms-grid-column-span: 4;
+  grid-area: 7 / 9 / span 4 / span 4;
+}
+
+#wrapper main #info #wind-direction {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: start;
+      -ms-flex-pack: start;
+          justify-content: start;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  padding-left: 5%;
+  -ms-grid-row: 5;
+  -ms-grid-row-span: 2;
+  -ms-grid-column: 1;
+  -ms-grid-column-span: 8;
+  grid-area: 5 / 1/ span 2 / span 8;
+}
+
+#wrapper main #info #wind-speed {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: start;
+      -ms-flex-pack: start;
+          justify-content: start;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  padding-left: 5%;
+  -ms-grid-row: 7;
+  -ms-grid-row-span: 2;
+  -ms-grid-column: 1;
+  -ms-grid-column-span: 8;
+  grid-area: 7 / 1 / span 2 / span 8;
+}
+
+#wrapper main #info #pressure {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: end;
+      -ms-flex-pack: end;
+          justify-content: end;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  padding-right: 5%;
+  padding-left: 10%;
+  -ms-grid-row: 5;
+  -ms-grid-row-span: 2;
+  -ms-grid-column: 13;
+  -ms-grid-column-span: 8;
+  grid-area: 5 / 13 / span 2 / span 8;
+}
+
+#wrapper main #info #humidity {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: end;
+      -ms-flex-pack: end;
+          justify-content: end;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  padding-right: 5%;
+  padding-left: 10%;
+  -ms-grid-row: 7;
+  -ms-grid-row-span: 2;
+  -ms-grid-column: 13;
+  -ms-grid-column-span: 8;
+  grid-area: 7 / 13 / span 2 / span 8;
+}
+
+#wrapper main #info #forecast {
+  -ms-grid-row: 4;
+  -ms-grid-row-span: 6;
+  -ms-grid-column: 13;
+  -ms-grid-column-span: 8;
+  grid-area: 4 / 13 / span 6 / span 8;
+}
+
 #wrapper footer {
   display: -webkit-box;
   display: -ms-flexbox;
@@ -98,9 +270,99 @@ html {
   html {
     font-size: 80%;
   }
+  #wrapper header #search {
+    width: 100%;
+  }
+  #wrapper header #search #city {
+    -ms-grid-row: 1;
+    -ms-grid-row-span: 1;
+    -ms-grid-column: 1;
+    -ms-grid-column-span: 7;
+    grid-area: 1 / 1 / span 1 / span 7;
+  }
+  #wrapper header #search #country {
+    -ms-grid-row: 2;
+    -ms-grid-row-span: 1;
+    -ms-grid-column: 2;
+    -ms-grid-column-span: 8;
+    grid-area: 2 /2 / span 1 / span 8;
+  }
+  #wrapper header #search #city-button {
+    -ms-grid-row: 1;
+    -ms-grid-row-span: 1;
+    -ms-grid-column: 8;
+    -ms-grid-column-span: 3;
+    grid-area: 1/ 8 / span 1 / span 3;
+  }
   #wrapper main #info {
     height: 80%;
     width: 90%;
+  }
+  #wrapper main #info #time {
+    -ms-grid-row: 2;
+    -ms-grid-row-span: 1;
+    -ms-grid-column: 1;
+    -ms-grid-column-span: 20;
+    grid-area: 2 / 1 / span 1 / span 20;
+  }
+  #wrapper main #info #city-name {
+    -ms-grid-row: 1;
+    -ms-grid-row-span: 1;
+    -ms-grid-column: 1;
+    -ms-grid-column-span: 20;
+    grid-area: 1 / 1 / span 1 / span 20;
+  }
+  #wrapper main #info #date {
+    -ms-grid-row: 3;
+    -ms-grid-row-span: 1;
+    -ms-grid-column: 1;
+    -ms-grid-column-span: 20;
+    grid-area: 3 / 1 / span 1 / span 20;
+  }
+  #wrapper main #info #temperature {
+    -ms-grid-row: 4;
+    -ms-grid-row-span: 2;
+    -ms-grid-column: 1;
+    -ms-grid-column-span: 20;
+    grid-area: 4 / 1 / span 2 / span 20;
+    font-size: 5rem;
+  }
+  #wrapper main #info #description {
+    -ms-grid-row: 6;
+    -ms-grid-row-span: 1;
+    -ms-grid-column: 1;
+    -ms-grid-column-span: 20;
+    grid-area: 6 / 1 / span 1 / span 20;
+  }
+  #wrapper main #info #wind {
+    -webkit-box-pack: center;
+        -ms-flex-pack: center;
+            justify-content: center;
+    -ms-grid-row: 7;
+    -ms-grid-row-span: 1;
+    -ms-grid-column: 1;
+    -ms-grid-column-span: 20;
+    grid-area: 7 / 1 / span 1 / span 20;
+  }
+  #wrapper main #info #pressure {
+    -webkit-box-pack: center;
+        -ms-flex-pack: center;
+            justify-content: center;
+    -ms-grid-row: 8;
+    -ms-grid-row-span: 1;
+    -ms-grid-column: 1;
+    -ms-grid-column-span: 20;
+    grid-area: 8 / 1 / span 1 / span 20;
+  }
+  #wrapper main #info #humidity {
+    -webkit-box-pack: center;
+        -ms-flex-pack: center;
+            justify-content: center;
+    -ms-grid-row: 9;
+    -ms-grid-row-span: 1;
+    -ms-grid-column: 1;
+    -ms-grid-column-span: 20;
+    grid-area: 9 / 1 / span 1 / span 20;
   }
 }
 
@@ -108,9 +370,77 @@ html {
   html {
     font-size: 80%;
   }
+  #wrapper header #search {
+    width: 100%;
+  }
   #wrapper main #info {
     height: 80%;
     width: 85%;
+  }
+  #wrapper main #info #time {
+    -ms-grid-row: 3;
+    -ms-grid-row-span: 1;
+    -ms-grid-column: 1;
+    -ms-grid-column-span: 10;
+    grid-area: 3 / 1 / span 1 / span 10;
+  }
+  #wrapper main #info #date {
+    -ms-grid-row: 3;
+    -ms-grid-row-span: 1;
+    -ms-grid-column: 11;
+    -ms-grid-column-span: 10;
+    grid-area: 3 / 11 / span 1 / span 10;
+  }
+  #wrapper main #info #wind {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-pack: start;
+        -ms-flex-pack: start;
+            justify-content: start;
+    -webkit-box-align: center;
+        -ms-flex-align: center;
+            align-items: center;
+    padding-left: 10%;
+    -ms-grid-row: 4;
+    -ms-grid-row-span: 2;
+    -ms-grid-column: 1;
+    -ms-grid-column-span: 8;
+    grid-area: 4 / 1 / span 2 / span 8;
+  }
+  #wrapper main #info #pressure {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-pack: start;
+        -ms-flex-pack: start;
+            justify-content: start;
+    -webkit-box-align: center;
+        -ms-flex-align: center;
+            align-items: center;
+    padding-left: 10%;
+    -ms-grid-row: 6;
+    -ms-grid-row-span: 2;
+    -ms-grid-column: 1;
+    -ms-grid-column-span: 8;
+    grid-area: 6 / 1 / span 2 / span 8;
+  }
+  #wrapper main #info #humidity {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-pack: start;
+        -ms-flex-pack: start;
+            justify-content: start;
+    -webkit-box-align: center;
+        -ms-flex-align: center;
+            align-items: center;
+    padding-left: 10%;
+    -ms-grid-row: 8;
+    -ms-grid-row-span: 2;
+    -ms-grid-column: 1;
+    -ms-grid-column-span: 8;
+    grid-area: 8 / 1 / span 2 / span 8;
   }
 }
 
@@ -118,7 +448,10 @@ html {
   html {
     font-size: 85%;
   }
-  #wrapper main #info {
+  #wrapper header #search {
+    width: 70%;
+  }
+  #wrapper header main #info {
     height: 80%;
     width: 80%;
   }

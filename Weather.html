@@ -12,16 +12,27 @@
 </head>
 <body>
     <div id="wrapper" class="">
-        <header class="">
+        <header>
             <form action="" id="search">
-                <input type="text" name="city" id="city">
-                <button id="city-button">Search City</button>
+                <input type="text" name="city" id="city" placeholder="City Name">
+                <select name="country" id="country">
+                    <option value="default">Country</option>
+                </select>
+                <button id="city-button">Search</button>
             </form>
         </header>
         <main>
             <div id="info">
-                <div id="time">123</div>
-                <div id="city-name">Milan</div>
+                <div id="time">22:05</div>
+                <div id="city-name">Milan,Italy</div>
+                <div id="date">23.05.20</div>
+                <div id="temperature">45</div>
+                <div id="description">Thunderstorm</div>
+                <div id="wind-direction">Wind Direction:North-West</div>
+                <div id="wind-speed">Wind Speed:5.5</div>
+                <div id="pressure">Pressure:1013</div>
+                <div id="humidity">Humidity:94%</div>
+                <div id="forecast"></div>
             </div>
         </main>
         <footer></footer>
@@ -30,6 +41,6 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.1/umd/popper.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.2/js/bootstrap.min.js"></script>
 <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
-<script src="Weather.js"></script>
+<script src="Weather.js" ></script>
 </body>
 </html>
