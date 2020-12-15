@@ -5,35 +5,37 @@
 html{
     font-size: 100%;
 }
+body {
+	background: url('./Images/lina-white-eZUaKlYDD8k-unsplash.jpg');
+	background-size: 100% 100%;
+}
 #wrapper{
     height: 100vh;
-    background: url('./Images/Main.jpg') fixed no-repeat ;
-    background-size: cover;
-    padding-top: 1%;
+    padding-top: 2%;
     header{
         height: 7%;
         font-size: 1.7rem;
         text-align: center;
         #search{
-            @include grid(repeat(10,10%),repeat(2,50%));
+            @include grid(repeat(10,10%),repeat(1,100%));
             width: 60%;
             margin: auto;
             #city{
-                opacity: 50%;
+                background-color: rgba(240, 248, 255, 0.3);
                 grid-area: 1 / 3 / span 1 / span 4;
-            }
-            #country{
-                grid-area: 2 /3 / span 1 / span 6;
-                font-size: 1.3rem;
+                border-radius: 10px;
             }
             #city-button{
                 grid-area: 1/ 7 / span 1 / span 2;
+                border-radius: 10px;
             }
             }
     }
     main{
         height: 93%;
-        @include flex(center,center);
+        display: none;
+        justify-content: center;
+        align-items: center;
         #info{
             height: 80%;
             width: 70%;
@@ -42,14 +44,14 @@ html{
             background-color: rgba(240, 248, 255, 0.2);
             border-radius: 10px;
             box-shadow: 0 0 15px black;
-            font-size: 2rem;
+            font-size: 1.5rem;
             #time{
                 @include flex(center,center);
                 grid-area: 1 / 1 / span 2 / span 5 ;
             }
             #city-name{
                 @include flex(center,center);
-                font-size: 3rem;
+                font-size: 2rem;
                 grid-area: 1 / 6 / span 2 / span 10 ;
             }
             #date{
@@ -63,7 +65,8 @@ html{
             }
             #description{
                 @include flex(center,center);
-                grid-area: 7 / 9 / span 4 / span 4 ;
+                font-size: 2rem;
+                grid-area: 8 / 6 / span 3 / span 10 ;
             }
             #wind-direction{
                 @include flex(start,center);
@@ -73,22 +76,17 @@ html{
             #wind-speed{
                 @include flex(start,center);
                 padding-left: 5%;
-                grid-area: 7 / 1 / span 2 / span 8 ;
+                grid-area: 7 / 1 / span 2 / span 9 ;
             }
             #pressure{
                 @include flex(end,center);
                 padding-right: 5%;
-                padding-left: 10%;
                 grid-area: 5 / 13 / span 2 / span 8 ;
             }
             #humidity{
                 @include flex(end,center);
                 padding-right: 5%;
-                padding-left: 10%;
                 grid-area: 7 / 13 / span 2 / span 8 ;
-            }
-            #forecast{
-                grid-area: 4 / 13 / span 6 / span 8 ;
             }
         }
     }

@@ -1,36 +1,124 @@
 //Variables
+const main = document.querySelector('main');
 const time = document.querySelector('#time');
 const cityName = document.querySelector('#city-name');
 const date = document.querySelector('#date');
 const temperature = document.querySelector('#temperature');
 const description = document.querySelector('#description');
-const wind = document.querySelector('#wind');
+const windDirection = document.querySelector('#wind-direction');
+const windSpeed = document.querySelector('#wind-speed');
 const pressure= document.querySelector('#pressure');
 const humidity= document.querySelector('#humidity');
 const forecast = document.querySelector('#forecast');
+//Date and time 
+let dateTimeArr = [];
+// Search Form
 const search = document.querySelector('#search');
-const country = document.querySelector('#country')
-
-
-//Search
 search.addEventListener('submit',function(e) {
     e.preventDefault();
-    
+    window.clearInterval()
+    let cityAndCountry = search.elements.city;
+    let countryCode = '';
+    // Format City and Country 
+    if(cityAndCountry.value.includes(',')) {
+        [city,country] = cityAndCountry.value.split(',');
+        city = city.trim();
+        country = country.trim();
+        if(country.includes(" ")) {
+            let countryArr = country.split(' ');
+            country = countryArr.map(x=>{
+                return x[0].toUpperCase() + x.toLowerCase().slice(1,x.length)
+            }).join(' ');
+        }
+        else{
+            country = country[0].toUpperCase() + country.toLowerCase().slice(1,country.length);
+        }
+        for(let i in codes) {
+            if(codes[i] == country) {
+                countryCode = i
+            }
+        }
+    }
+    else{
+        city = cityAndCountry.value
+    }
+    // Weather Promise
+
+    functions.getWeather(city,countryCode)
+    .then(res=>{
+        if(main.style.display === '') {
+            main.style.display = 'flex';
+        }
+        return res
+    })
+    .then(res=>{
+        cityName.innerText = `${res.data.name},${codes[res.data.sys.country]}`;
+        temperature.innerText = `${Math.round(res.data.main.temp-273)}°C`;
+        description.innerText = `${res.data.weather[0].description[0].toUpperCase()}${res.data.weather[0].description.slice(1,res.data.weather[0].description.length)}`;
+        windDirection.innerText = `Wind Direction:${res.data.wind.deg}`;
+        windSpeed.innerText = `Wind Speed:${res.data.wind.speed}m/s`;
+        pressure.innerText = `Pressure:${res.data.main.pressure}hPA`;
+        humidity.innerText = `Humidity:${res.data.main.humidity}%`;
+        return res
+    })
+    .then(res=>{
+        functions.getTime(res.data.name,res.data.sys.country)
+        .then(res=>{
+            dateTimeArr = res.data.datetime.split(" ");
+            dateTimeArr[0] = dateTimeArr[0].split("-");
+            dateTimeArr[1] = dateTimeArr[1].split(":");
+            dateTimeArr = dateTimeArr[0].concat(dateTimeArr[1]);
+            let newArr = [];
+            dateTimeArr.forEach(x=>{
+                newArr.push(parseInt(x))
+            })
+            dateTimeArr = newArr;
+            functions.displayTime();
+        })
+    })
+    .catch(err=>{
+        console.log(err);
+    })
+    cityAndCountry.value = '';
 })
 // Functions
 const functions = {
-    async showTime(city='default'){
-        if(city === 'default') {
-            let timeAndDate = await axios.get('http://worldtimeapi.org/api/ip');
-            console.log(timeAndDate)
+    async getWeather(cityVal,countryVal) {
+        return await axios.get(`https://api.openweathermap.org/data/2.5/weather?q=${cityVal},${countryVal}&APPID=d4a9bdcf926df60c453efe8bd2492aa1`)
+    },
+    async getTime(cityVal,countryVal){
+        return await axios.get(`https://timezone.abstractapi.com/v1/current_time?api_key=6a110204179e467188dfd0a4869ce6f2&location=${cityVal},${countryVal}`)
+    },
+    // Time and Date logic
+    displayTime(){
+        dateTimeArr[5]++;
+        if(dateTimeArr[3]>23) {
+            dateTimeArr[2]+=1;
+            dateTimeArr[3]=0;
         }
-        else{
-            let timeAndDate = await axios.get(`http://worldtimeapi.org/api/`);
-            console.log(timeAndDate)
+        else if(dateTimeArr[4]>59) {
+            dateTimeArr[3]+=1;
+            dateTimeArr[4]=0;
         }
+        else if(dateTimeArr[5]>59) {
+            dateTimeArr[4]+=1;
+            dateTimeArr[5]=0;
+        }
+        month = (dateTimeArr[1]<10)? "0" + dateTimeArr[1]:dateTimeArr[1];
+        day = (dateTimeArr[2]<10)? "0" + dateTimeArr[2]:dateTimeArr[2];
+        hour = (dateTimeArr[3]<10)? "0" + dateTimeArr[3]:dateTimeArr[3];
+        minute = (dateTimeArr[4]<10)? "0" + dateTimeArr[4]:dateTimeArr[4];
+        second = (dateTimeArr[5]<10)? "0" + dateTimeArr[5]:dateTimeArr[5];
+        date.innerText = dateTimeArr[0] + "." + month + "." + day ;
+        time.innerText = hour + ":" + minute + ":" + second ;
+        let id = setTimeout(functions.displayTime,1000);
+        search.addEventListener('submit',function(e) {
+            e.preventDefault()
+            window.clearTimeout(id)
+        })
     }
 }
-// Countries
+// Countries and Codes
 const codes = {
     "AF": "Afghanistan",
     "AX": "Aland Islands",
@@ -278,9 +366,3 @@ const codes = {
     "ZM": "Zambia",
     "ZW": "Zimbabwe"
 };
-for(let i in codes) {
-    let option = document.createElement('option');
-    option.innerText = codes[i];
-    option.setAttribute('value',codes[i]);
-    country.appendChild(option);
-}

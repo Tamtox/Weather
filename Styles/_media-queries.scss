@@ -10,9 +10,6 @@
                 #city{
                     grid-area: 1 / 1 / span 1 / span 7;
                 }
-                #country{
-                    grid-area: 2 /2 / span 1 / span 8;
-                }
                 #city-button{
                     grid-area: 1/ 8 / span 1 / span 3;
                 }
@@ -38,17 +35,21 @@
                 #description{
                     grid-area: 6 / 1 / span 1 / span 20 ;
                 }
-                #wind{
+                #wind-direction{
                     justify-content: center;
                     grid-area: 7 / 1 / span 1 / span 20 ;
                 }
-                #pressure{
+                #wind-speed{
                     justify-content: center;
                     grid-area: 8 / 1 / span 1 / span 20 ;
                 }
-                #humidity{
+                #pressure{
                     justify-content: center;
                     grid-area: 9 / 1 / span 1 / span 20 ;
+                }
+                #humidity{
+                    justify-content: center;
+                    grid-area: 10 / 1 / span 1 / span 20 ;
                 }
             }
         }
@@ -74,20 +75,19 @@
                 #date{
                     grid-area: 3 / 11 / span 1 / span 10 ;
                 }
-                #wind{
-                    @include flex(start,center);
-                    padding-left: 10%;
+                #wind-direction{
+                    padding-left: 5%;
+                    grid-area: 5 / 1 / span 2 / span 7 ;
+                }
+                #wind-speedx{
+                    padding-left: 5%;
                     grid-area: 4 / 1 / span 2 / span 8 ;
                 }
                 #pressure{
-                    @include flex(start,center);
-                    padding-left: 10%;
-                    grid-area: 6 / 1 / span 2 / span 8 ;
+                    grid-area: 5 / 13 / span 2 / span 8 ;
                 }
                 #humidity{
-                    @include flex(start,center);
-                    padding-left: 10%;
-                    grid-area: 8 / 1 / span 2 / span 8 ;
+                    grid-area: 7 / 13 / span 2 / span 8 ;
                 }
             }
         }
