@@ -54,7 +54,9 @@ body {
 
 #wrapper main {
   height: 93%;
-  display: none;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
   -webkit-box-pack: center;
       -ms-flex-pack: center;
           justify-content: center;
@@ -364,6 +366,13 @@ body {
   #wrapper main #info {
     height: 80%;
     width: 85%;
+  }
+  #wrapper main #info #city-name {
+    -ms-grid-row: 1;
+    -ms-grid-row-span: 2;
+    -ms-grid-column: 1;
+    -ms-grid-column-span: 20;
+    grid-area: 1 / 1 / span 2 / span 20;
   }
   #wrapper main #info #time {
     -ms-grid-row: 3;

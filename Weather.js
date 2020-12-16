@@ -55,7 +55,7 @@ search.addEventListener('submit',function(e) {
         cityName.innerText = `${res.data.name},${codes[res.data.sys.country]}`;
         temperature.innerText = `${Math.round(res.data.main.temp-273)}°C`;
         description.innerText = `${res.data.weather[0].description[0].toUpperCase()}${res.data.weather[0].description.slice(1,res.data.weather[0].description.length)}`;
-        windDirection.innerText = `Wind Direction:${res.data.wind.deg}`;
+        windDirection.innerText = `Wind Direction:${functions.windDirection(res.data.wind.deg)}`;
         windSpeed.innerText = `Wind Speed:${res.data.wind.speed}m/s`;
         pressure.innerText = `Pressure:${res.data.main.pressure}hPA`;
         humidity.innerText = `Humidity:${res.data.main.humidity}%`;
@@ -112,10 +112,39 @@ const functions = {
         date.innerText = dateTimeArr[0] + "." + month + "." + day ;
         time.innerText = hour + ":" + minute + ":" + second ;
         let id = setTimeout(functions.displayTime,1000);
+        // Clear running timeouts
         search.addEventListener('submit',function(e) {
             e.preventDefault()
             window.clearTimeout(id)
         })
+    },
+    windDirection(deg) {
+        console.log(deg)
+        const directions = "N↑,N-E↗,E→,S-E↘,S↓,S-W↙,W←,N-W↖".split(",");
+        if(22.5 < deg && deg <= 67.5) {
+            return directions[1]
+        }
+        else if(67,5 < deg && deg<= 112.5) {
+            return directions[2];
+        }
+        else if(112.5 < deg && deg <= 157.5) {
+            return directions[3];
+        }
+        else if(157.5 < deg && deg <= 202.5) {
+            return directions[4];
+        }
+        else if(202.5 < deg && deg <= 247.5) {
+            return directions[5];
+        }
+        else if(247.5 < deg && deg <= 292.5) {
+            return directions[6];
+        }
+        else if(292.5 < deg && deg <= 337.5) {
+            return directions[7];
+        }
+        else{
+            return directions[0];
+        }     
     }
 }
 // Countries and Codes

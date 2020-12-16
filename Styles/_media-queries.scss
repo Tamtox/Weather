@@ -69,6 +69,10 @@
             #info{
                 height: 80%;
                 width: 85%;
+                #city-name{
+                    
+                    grid-area: 1 / 1 / span 2 / span 20 ;
+                }
                 #time{
                     grid-area: 3 / 1 / span 1 / span 10 ;
                 }
