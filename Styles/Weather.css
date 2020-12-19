@@ -76,7 +76,7 @@ body {
   border-radius: 10px;
   -webkit-box-shadow: 0 0 15px black;
           box-shadow: 0 0 15px black;
-  font-size: 1.5rem;
+  font-size: 1.3rem;
 }
 
 #wrapper main #info #time {
@@ -306,6 +306,10 @@ body {
     font-size: 5rem;
   }
   #wrapper main #info #description {
+    -webkit-box-pack: center;
+        -ms-flex-pack: center;
+            justify-content: center;
+    padding: none none none none;
     -ms-grid-row: 6;
     -ms-grid-row-span: 1;
     -ms-grid-column: 1;
@@ -316,6 +320,7 @@ body {
     -webkit-box-pack: center;
         -ms-flex-pack: center;
             justify-content: center;
+    padding: none none none none;
     -ms-grid-row: 7;
     -ms-grid-row-span: 1;
     -ms-grid-column: 1;
@@ -326,6 +331,7 @@ body {
     -webkit-box-pack: center;
         -ms-flex-pack: center;
             justify-content: center;
+    padding: none none none none;
     -ms-grid-row: 8;
     -ms-grid-row-span: 1;
     -ms-grid-column: 1;
@@ -336,6 +342,7 @@ body {
     -webkit-box-pack: center;
         -ms-flex-pack: center;
             justify-content: center;
+    padding: none none none none;
     -ms-grid-row: 9;
     -ms-grid-row-span: 1;
     -ms-grid-column: 1;
@@ -346,6 +353,7 @@ body {
     -webkit-box-pack: center;
         -ms-flex-pack: center;
             justify-content: center;
+    padding: none none none none;
     -ms-grid-row: 10;
     -ms-grid-row-span: 1;
     -ms-grid-column: 1;
@@ -386,35 +394,45 @@ body {
     -ms-grid-column-span: 10;
     grid-area: 3 / 11 / span 1 / span 10;
   }
-  #wrapper main #info #wind-direction {
-    padding-left: 5%;
-    -ms-grid-row: 5;
-    -ms-grid-row-span: 2;
-    -ms-grid-column: 1;
-    -ms-grid-column-span: 7;
-    grid-area: 5 / 1 / span 2 / span 7;
-  }
-  #wrapper main #info #wind-speedx {
-    padding-left: 5%;
+  #wrapper main #info #temperature {
     -ms-grid-row: 4;
+    -ms-grid-row-span: 3;
+    -ms-grid-column: 9;
+    -ms-grid-column-span: 4;
+    grid-area: 4 / 9 / span 3 / span 4;
+    font-size: 7rem;
+  }
+  #wrapper main #info #wind-direction {
+    padding-left: 20%;
+    -ms-grid-row: 6;
     -ms-grid-row-span: 2;
     -ms-grid-column: 1;
-    -ms-grid-column-span: 8;
-    grid-area: 4 / 1 / span 2 / span 8;
+    -ms-grid-column-span: 10;
+    grid-area: 6 / 1 / span 2 / span 10;
   }
-  #wrapper main #info #pressure {
-    -ms-grid-row: 5;
-    -ms-grid-row-span: 2;
-    -ms-grid-column: 13;
-    -ms-grid-column-span: 8;
-    grid-area: 5 / 13 / span 2 / span 8;
-  }
-  #wrapper main #info #humidity {
+  #wrapper main #info #wind-speed {
+    padding-left: 20%;
     -ms-grid-row: 7;
     -ms-grid-row-span: 2;
-    -ms-grid-column: 13;
-    -ms-grid-column-span: 8;
-    grid-area: 7 / 13 / span 2 / span 8;
+    -ms-grid-column: 1;
+    -ms-grid-column-span: 10;
+    grid-area: 7 / 1 / span 2 / span 10;
+  }
+  #wrapper main #info #pressure {
+    padding-right: 10%;
+    -ms-grid-row: 6;
+    -ms-grid-row-span: 2;
+    -ms-grid-column: 10;
+    -ms-grid-column-span: 10;
+    grid-area: 6 / 10 / span 2 / span 10;
+  }
+  #wrapper main #info #humidity {
+    padding-right: 10%;
+    -ms-grid-row: 7;
+    -ms-grid-row-span: 2;
+    -ms-grid-column: 10;
+    -ms-grid-column-span: 10;
+    grid-area: 7 / 10 / span 2 / span 10;
   }
 }
 

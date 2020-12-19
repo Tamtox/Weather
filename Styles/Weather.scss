@@ -44,7 +44,7 @@ body {
             background-color: rgba(240, 248, 255, 0.2);
             border-radius: 10px;
             box-shadow: 0 0 15px black;
-            font-size: 1.5rem;
+            font-size: 1.3rem;
             #time{
                 @include flex(center,center);
                 grid-area: 1 / 1 / span 2 / span 5 ;

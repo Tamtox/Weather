@@ -19,10 +19,16 @@ search.addEventListener('submit',function(e) {
     window.clearInterval()
     let cityAndCountry = search.elements.city;
     let countryCode = '';
-    // Format City and Country 
+    // Format City and Country Input to Match API 
     if(cityAndCountry.value.includes(',')) {
         [city,country] = cityAndCountry.value.split(',');
         city = city.trim();
+        if(city.includes("-")) {
+            while(city.includes("-")) {
+                city = city.replace("-"," ");
+            }
+        }
+        console.log(city)
         country = country.trim();
         if(country.includes(" ")) {
             let countryArr = country.split(' ');
@@ -39,8 +45,15 @@ search.addEventListener('submit',function(e) {
             }
         }
     }
+    //Format City to Match API
     else{
-        city = cityAndCountry.value
+        city = cityAndCountry.value;
+        city = city.trim();
+        if(city.includes("-")) {
+            while(city.includes("-")) {
+                city = city.replace("-"," ");
+            }
+        }
     }
     // Weather Promise
 
@@ -55,7 +68,7 @@ search.addEventListener('submit',function(e) {
         cityName.innerText = `${res.data.name},${codes[res.data.sys.country]}`;
         temperature.innerText = `${Math.round(res.data.main.temp-273)}°C`;
         description.innerText = `${res.data.weather[0].description[0].toUpperCase()}${res.data.weather[0].description.slice(1,res.data.weather[0].description.length)}`;
-        windDirection.innerText = `Wind Direction:${functions.windDirection(res.data.wind.deg)}`;
+        windDirection.innerText = `Wind Direction: ${functions.windDirection(res.data.wind.deg)}`;
         windSpeed.innerText = `Wind Speed:${res.data.wind.speed}m/s`;
         pressure.innerText = `Pressure:${res.data.main.pressure}hPA`;
         humidity.innerText = `Humidity:${res.data.main.humidity}%`;
@@ -83,13 +96,15 @@ search.addEventListener('submit',function(e) {
 })
 // Functions
 const functions = {
+    // Open Weather API async call
     async getWeather(cityVal,countryVal) {
         return await axios.get(`https://api.openweathermap.org/data/2.5/weather?q=${cityVal},${countryVal}&APPID=d4a9bdcf926df60c453efe8bd2492aa1`)
     },
+    // Abstaract API async call
     async getTime(cityVal,countryVal){
         return await axios.get(`https://timezone.abstractapi.com/v1/current_time?api_key=6a110204179e467188dfd0a4869ce6f2&location=${cityVal},${countryVal}`)
     },
-    // Time and Date logic
+    // Time and Date logic for Animated Clock
     displayTime(){
         dateTimeArr[5]++;
         if(dateTimeArr[3]>23) {
@@ -119,8 +134,7 @@ const functions = {
         })
     },
     windDirection(deg) {
-        console.log(deg)
-        const directions = "N↑,N-E↗,E→,S-E↘,S↓,S-W↙,W←,N-W↖".split(",");
+        const directions = "N ↑,N-E ↗,E →,S-E ↘,S ↓,S-W ↙,W ←,N-W ↖".split(",");
         if(22.5 < deg && deg <= 67.5) {
             return directions[1]
         }
