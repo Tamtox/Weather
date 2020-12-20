@@ -10,8 +10,9 @@ const windSpeed = document.querySelector('#wind-speed');
 const pressure= document.querySelector('#pressure');
 const humidity= document.querySelector('#humidity');
 const forecast = document.querySelector('#forecast');
-//Date and time 
+//Storage;
 let dateTimeArr = [];
+let locationArr = [];
 // Search Form
 const search = document.querySelector('#search');
 search.addEventListener('submit',function(e) {
@@ -28,7 +29,6 @@ search.addEventListener('submit',function(e) {
                 city = city.replace("-"," ");
             }
         }
-        console.log(city)
         country = country.trim();
         if(country.includes(" ")) {
             let countryArr = country.split(' ');
@@ -41,7 +41,7 @@ search.addEventListener('submit',function(e) {
         }
         for(let i in codes) {
             if(codes[i] == country) {
-                countryCode = i
+                countryCode = i;
             }
         }
     }
@@ -56,14 +56,15 @@ search.addEventListener('submit',function(e) {
         }
     }
     // Weather Promise
-
     functions.getWeather(city,countryCode)
+    // Display main weather window
     .then(res=>{
         if(main.style.display === '') {
             main.style.display = 'flex';
         }
         return res
     })
+    // Set weather data 
     .then(res=>{
         cityName.innerText = `${res.data.name},${codes[res.data.sys.country]}`;
         temperature.innerText = `${Math.round(res.data.main.temp-273)}°C`;
@@ -74,7 +75,10 @@ search.addEventListener('submit',function(e) {
         humidity.innerText = `Humidity:${res.data.main.humidity}%`;
         return res
     })
+    // Set time/date data
     .then(res=>{
+        console.log(res.data)
+        locationArr=[res.data.name,res.data.sys.country];
         functions.getTime(res.data.name,res.data.sys.country)
         .then(res=>{
             dateTimeArr = res.data.datetime.split(" ");
@@ -92,6 +96,7 @@ search.addEventListener('submit',function(e) {
     .catch(err=>{
         console.log(err);
     })
+    // Reset form input
     cityAndCountry.value = '';
 })
 // Functions
@@ -133,6 +138,7 @@ const functions = {
             window.clearTimeout(id)
         })
     },
+    // Wind Direction from Angle
     windDirection(deg) {
         const directions = "N ↑,N-E ↗,E →,S-E ↘,S ↓,S-W ↙,W ←,N-W ↖".split(",");
         if(22.5 < deg && deg <= 67.5) {
