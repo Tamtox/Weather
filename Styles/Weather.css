@@ -51,6 +51,15 @@ body {
   -ms-grid-column-span: 2;
   grid-area: 1/ 7 / span 1 / span 2;
   border-radius: 15px;
+  -webkit-transition: 0.3s;
+  transition: 0.3s;
+}
+
+#wrapper header #search #city-button:hover {
+  -webkit-transform: scale3d(1.1);
+          transform: scale3d(1.1);
+  -webkit-box-shadow: 0 0 5px black;
+          box-shadow: 0 0 5px black;
 }
 
 #wrapper main {

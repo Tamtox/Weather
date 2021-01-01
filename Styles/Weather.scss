@@ -29,6 +29,11 @@ body {
             #city-button{
                 grid-area: 1/ 7 / span 1 / span 2;
                 border-radius: 15px;
+                transition: 0.3s;
+            }
+            #city-button:hover {
+                transform: scale3d(1.1);
+                box-shadow: 0 0 5px black;
             }
             }
     }

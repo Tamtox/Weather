@@ -19,42 +19,9 @@ search.addEventListener('submit',function(e) {
     e.preventDefault();
     window.clearInterval()
     let cityAndCountry = search.elements.city;
-    let countryCode = '';
     // Format City and Country Input to Match API 
-    if(cityAndCountry.value.includes(',')) {
-        [city,country] = cityAndCountry.value.split(',');
-        city = city.trim();
-        if(city.includes("-")) {
-            while(city.includes("-")) {
-                city = city.replace("-"," ");
-            }
-        }
-        country = country.trim();
-        if(country.includes(" ")) {
-            let countryArr = country.split(' ');
-            country = countryArr.map(x=>{
-                return x[0].toUpperCase() + x.toLowerCase().slice(1,x.length)
-            }).join(' ');
-        }
-        else{
-            country = country[0].toUpperCase() + country.toLowerCase().slice(1,country.length);
-        }
-        for(let i in codes) {
-            if(codes[i] == country) {
-                countryCode = i;
-            }
-        }
-    }
-    //Format City to Match API
-    else{
-        city = cityAndCountry.value;
-        city = city.trim();
-        if(city.includes("-")) {
-            while(city.includes("-")) {
-                city = city.replace("-"," ");
-            }
-        }
-    }
+    let formattedCityCountry = functions.formatCityCountry(cityAndCountry);
+    let [city,countryCode] = formattedCityCountry;
     // Weather Promise
     functions.getWeather(city,countryCode)
     // Display main weather window
@@ -66,18 +33,11 @@ search.addEventListener('submit',function(e) {
     })
     // Set weather data 
     .then(res=>{
-        cityName.innerText = `${res.data.name},${codes[res.data.sys.country]}`;
-        temperature.innerText = `${Math.round(res.data.main.temp-273)}°C`;
-        description.innerText = `${res.data.weather[0].description[0].toUpperCase()}${res.data.weather[0].description.slice(1,res.data.weather[0].description.length)}`;
-        windDirection.innerText = `Wind Direction: ${functions.windDirection(res.data.wind.deg)}`;
-        windSpeed.innerText = `Wind Speed:${res.data.wind.speed}m/s`;
-        pressure.innerText = `Pressure:${res.data.main.pressure}hPA`;
-        humidity.innerText = `Humidity:${res.data.main.humidity}%`;
+        functions.setWeatherData(res);
         return res
     })
     // Set time/date data
     .then(res=>{
-        console.log(res.data)
         locationArr=[res.data.name,res.data.sys.country];
         functions.getTime(res.data.name,res.data.sys.country)
         .then(res=>{
@@ -108,6 +68,53 @@ const functions = {
     // Abstaract API async call
     async getTime(cityVal,countryVal){
         return await axios.get(`https://timezone.abstractapi.com/v1/current_time?api_key=6a110204179e467188dfd0a4869ce6f2&location=${cityVal},${countryVal}`)
+    },
+    setWeatherData(res) {
+        cityName.innerText = `${res.data.name},${codes[res.data.sys.country]}`;
+        temperature.innerText = `${Math.round(res.data.main.temp-273)}°C`;
+        description.innerText = `${res.data.weather[0].description[0].toUpperCase()}${res.data.weather[0].description.slice(1,res.data.weather[0].description.length)}`;
+        windDirection.innerText = `Wind Direction: ${functions.windDirection(res.data.wind.deg)}`;
+        windSpeed.innerText = `Wind Speed:${res.data.wind.speed}m/s`;
+        pressure.innerText = `Pressure:${res.data.main.pressure}hPA`;
+        humidity.innerText = `Humidity:${res.data.main.humidity}%`;
+    },
+    // Format City and Country
+    formatCityCountry(cityAndCountry) {
+        let countryCode = '';
+        let [city,country] = cityAndCountry.value.split(',');
+        if(cityAndCountry.value.includes(',')) {
+            if(city.includes("-")) {
+                while(city.includes("-")) {
+                    city = city.replace("-"," ");
+                }
+            }
+            country = country.trim();
+            if(country.includes(" ")) {
+                let countryArr = country.split(' ');
+                country = countryArr.map(x=>{
+                    return x[0].toUpperCase() + x.toLowerCase().slice(1,x.length)
+                }).join(' ');
+            }
+            else{
+                country = country[0].toUpperCase() + country.toLowerCase().slice(1,country.length);
+            }
+            for(let i in codes) {
+                if(codes[i] == country) {
+                    countryCode = i;
+                }
+            }
+            return [city,countryCode]
+        }
+        else{
+            city = cityAndCountry.value;
+            city = city.trim();
+            if(city.includes("-")) {
+                while(city.includes("-")) {
+                    city = city.replace("-"," ");
+                }
+            }
+            return [city]
+        }
     },
     // Time and Date logic for Animated Clock
     displayTime(){
