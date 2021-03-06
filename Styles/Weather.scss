@@ -16,6 +16,7 @@ body {
         height: 7%;
         font-size: 1.7rem;
         text-align: center;
+        transform: translateY(17vw);
         #search{
             @include grid(repeat(10,10%),repeat(1,100%));
             width: 60%;
@@ -35,13 +36,15 @@ body {
                 transform: scale3d(1.1);
                 box-shadow: 0 0 5px black;
             }
-            }
+        }
     }
     main{
         height: 93%;
-        display: none;
+        display: flex;
+        visibility: hidden;
         justify-content: center;
         align-items: center;
+        transform: scale(0.01);
         #info{
             height: 80%;
             width: 70%;
@@ -99,5 +102,27 @@ body {
     footer{
         @include flex(end,center)
     }
+}
+@keyframes fromCenterToTop {
+    0% {
+        transform: translateY(17vw);
+    }
+    100% {
+        transform: translateY(0);
+    }
+}
+.CenterToTop {
+    animation: 0.5s ease-in-out 0s 1 fromCenterToTop;
+}
+@keyframes enlarge {
+    0% {
+        transform: scale(0.01);
+    }
+    100% {
+        transform: scale(1);
+    }
+}
+.Enlarge {
+    animation: 1s ease-in-out 0s 1 enlarge;
 }
 @import 'media-queries';

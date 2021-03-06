@@ -10,6 +10,7 @@ const windSpeed = document.querySelector('#wind-speed');
 const pressure= document.querySelector('#pressure');
 const humidity= document.querySelector('#humidity');
 const forecast = document.querySelector('#forecast');
+const header = document.querySelector('header');
 //Storage;
 let dateTimeArr = [];
 let locationArr = [];
@@ -17,7 +18,8 @@ let locationArr = [];
 const search = document.querySelector('#search');
 search.addEventListener('submit',function(e) {
     e.preventDefault();
-    window.clearInterval()
+    window.clearInterval();
+    //Animations
     let cityAndCountry = search.elements.city;
     // Format City and Country Input to Match API 
     let formattedCityCountry = functions.formatCityCountry(cityAndCountry);
@@ -26,9 +28,13 @@ search.addEventListener('submit',function(e) {
     functions.getWeather(city,countryCode)
     // Display main weather window
     .then(res=>{
-        if(main.style.display === '') {
-            main.style.display = 'flex';
-        }
+        if(main.style.visibility === '') {
+            main.style.visibility = 'visible';
+            header.classList.add('CenterToTop');
+            main.classList.add('Enlarge');
+            header.style.transform = 'translateY(0)';
+            main.style.transform = 'scale(1)';      
+        }       
         return res
     })
     // Set weather data 
@@ -67,7 +73,7 @@ const functions = {
     },
     // Abstaract API async call
     async getTime(cityVal,countryVal){
-        return await axios.get(`https://timezone.abstractapi.com/v1/current_time?api_key=6a110204179e467188dfd0a4869ce6f2&location=${cityVal},${countryVal}`)
+        return await axios.get(`https://timezone.abstractapi.com/v1/current_time?api_key=6a110204179e467188dfd0a4869ce6f2&location=${cityVal},${countryVal}`,{header:{'Access-Control-Allow-Origin': '*'}})
     },
     setWeatherData(res) {
         cityName.innerText = `${res.data.name},${codes[res.data.sys.country]}`;
