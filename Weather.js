@@ -73,7 +73,7 @@ const functions = {
     },
     // Abstaract API async call
     async getTime(cityVal,countryVal){
-        return await axios.get(`https://timezone.abstractapi.com/v1/current_time?api_key=6a110204179e467188dfd0a4869ce6f2&location=${cityVal},${countryVal}`,{header:{'Access-Control-Allow-Origin': '*'}})
+        return await axios.get(`https://timezone.abstractapi.com/v1/current_time?api_key=6a110204179e467188dfd0a4869ce6f2&location=${cityVal},${codes[countryVal]}`,{header:{'Access-Control-Allow-Origin': '*'}})
     },
     setWeatherData(res) {
         cityName.innerText = `${res.data.name},${codes[res.data.sys.country]}`;
