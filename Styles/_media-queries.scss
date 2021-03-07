@@ -5,6 +5,7 @@
     }
     #wrapper{
         header{
+            transform: translateY(50vw);
             #search{
                 width: 100%;
                 #city{
@@ -16,20 +17,23 @@
                 }
         }
         main{
+            #toggle{
+                transform: translateY(-40vh);
+            }
             #info{
                 height: 80%;
                 width: 90%;
                 #time{
-                    grid-area: 2 / 1 / span 1 / span 20 ;
-                }
-                #city-name{
-                    grid-area: 1 / 1 / span 1 / span 20 ;
-                }
-                #date{
                     grid-area: 3 / 1 / span 1 / span 20 ;
                 }
+                #city-name{
+                    grid-area: 1 / 1 / span 2 / span 20 ;
+                }
+                #date{
+                    grid-area: 4 / 1 / span 1 / span 20 ;
+                }
                 #temperature{
-                    grid-area: 4 / 1 / span 2 / span 20 ;
+                    grid-area: 5 / 1 / span 1 / span 20 ;
                     font-size: 5rem
                 }
                 #description{
@@ -58,6 +62,11 @@
                     grid-area: 10 / 1 / span 1 / span 20 ;
                 }
             }
+            #forecast{
+                height: 80%;
+                width: 90%;
+                grid-template-columns: 100%;
+            }
         }
     }
 }
@@ -67,11 +76,15 @@
     }
     #wrapper{
         header{
+            transform: translateY(45vw);
             #search{
                 width: 100%;
             }
         }
         main{
+            #toggle{
+                transform: translateY(-40vh);
+            }
             #info{
                 height: 80%;
                 width: 85%;
@@ -106,6 +119,11 @@
                     grid-area: 7 / 10 / span 2 / span 10 ;
                 }
             }
+            #forecast{
+                height: 80%;
+                width: 85%;
+                grid-template-columns: 48.5% 48.5%;
+            }
         }
     }
 }
@@ -115,14 +133,22 @@
     }
     #wrapper{
         header{
+            transform: translateY(30vw);
             #search{
-                width: 70%;
+                width: 100%;
+            }
         }
         main{
+            #toggle{
+                transform: translateY(-39vh);
+            }
             #info{
                 height: 80%;
                 width: 80%;
             }
+            #forecast{
+                height: 80%;
+                width: 80%;
             }
         }
     }
@@ -132,8 +158,18 @@
     font-size: 90%;
     }
     #wrapper{
+        header{
+            transform: translateY(25vw);
+            #search{
+                width: 100%;
+            }
+        }
         main{
             #info{
+                height: 80%;
+                width: 75%;
+            }
+            #forecast{
                 height: 80%;
                 width: 75%;
             }

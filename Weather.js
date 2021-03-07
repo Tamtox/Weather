@@ -9,8 +9,10 @@ const windDirection = document.querySelector('#wind-direction');
 const windSpeed = document.querySelector('#wind-speed');
 const pressure= document.querySelector('#pressure');
 const humidity= document.querySelector('#humidity');
+const info = document.querySelector('#info');
 const forecast = document.querySelector('#forecast');
 const header = document.querySelector('header');
+const toggle = document.querySelector('#toggle');
 //Storage;
 let dateTimeArr = [];
 let locationArr = [];
@@ -26,6 +28,16 @@ search.addEventListener('submit',function(e) {
     let [city,countryCode] = formattedCityCountry;
     // Weather Promise
     functions.getWeather(city,countryCode)
+    // Set weather data 
+    .then(res=>{
+        functions.setWeatherData(res);
+        functions.getForecast(city,countryCode)
+        .then(forecastRes=>{
+            functions.setForecastData(forecastRes);
+        })
+        return res
+    })
+    //Set forecast
     // Display main weather window
     .then(res=>{
         if(main.style.visibility === '') {
@@ -35,11 +47,6 @@ search.addEventListener('submit',function(e) {
             header.style.transform = 'translateY(0)';
             main.style.transform = 'scale(1)';      
         }       
-        return res
-    })
-    // Set weather data 
-    .then(res=>{
-        functions.setWeatherData(res);
         return res
     })
     // Set time/date data
@@ -65,11 +72,28 @@ search.addEventListener('submit',function(e) {
     // Reset form input
     cityAndCountry.value = '';
 })
+// Toggle Between Current Weather and Forecast
+toggle.addEventListener('click',function() {
+    if(toggle.innerText === 'Forecast') {
+        forecast.style.opacity = '100%';
+        info.style.opacity = '0%';
+        toggle.innerText = 'Weather';
+    }
+    else {
+        forecast.style.opacity = '0%';
+        info.style.opacity = '100%';
+        toggle.innerText = 'Forecast';
+    }
+})
 // Functions
 const functions = {
-    // Open Weather API async call
+    // Open Weather API current weather async call
     async getWeather(cityVal,countryVal) {
         return await axios.get(`https://api.openweathermap.org/data/2.5/weather?q=${cityVal},${countryVal}&APPID=d4a9bdcf926df60c453efe8bd2492aa1`)
+    },
+    // Open Weather API forecast async call
+    async getForecast(cityVal,countryVal) {
+        return await axios.get(`https://api.openweathermap.org/data/2.5/forecast?q=${cityVal},${countryVal}&APPID=d4a9bdcf926df60c453efe8bd2492aa1`)
     },
     // Abstaract API async call
     async getTime(cityVal,countryVal){
@@ -83,6 +107,33 @@ const functions = {
         windSpeed.innerText = `Wind Speed:${res.data.wind.speed}m/s`;
         pressure.innerText = `Pressure:${res.data.main.pressure}hPA`;
         humidity.innerText = `Humidity:${res.data.main.humidity}%`;
+    },
+    setForecastData(res) {
+        forecast.innerHTML = '';
+        const forecastArr =  res.data.list;
+        for(let element of forecastArr) {
+            // Create elements 
+            const forecastCard = document.createElement('div');
+            const [forecastDate,forecastTemp,forecastDescription,forecastWind,forecastHumidity,forecastPressure] = [document.createElement('div'),document.createElement('div'),document.createElement('div'),document.createElement('div'),document.createElement('div'),document.createElement('div')]
+            // const forecastDate  = document.createElement('div');
+            // const forecastTemp = document.createElement('div');
+            // const forecastDescription = document.createElement('div');
+            // const forecastWind = document.createElement('div');
+            // const forecastHumidity = document.createElement('div');
+            // const forecastPressure = document.createElement('div');
+            // Set values
+            forecastCard.classList.add('forecastCard');
+            forecastDate.classList.add('date');
+            forecastDate.innerText = element.dt_txt;
+            forecastTemp.innerText = `${Math.round(element.main.temp-273)}°C`;
+            forecastDescription.innerText = `${element.weather[0].description[0].toUpperCase()}${element.weather[0].description.slice(1,element.weather[0].description.length)}`;
+            forecastWind.innerText = `Wind: ${functions.windDirection(element.wind.deg)} ${element.wind.speed}m/s`;
+            forecastHumidity.innerText = `Humidity:${element.main.humidity}%`;
+            forecastPressure.innerText = `Pressure:${element.main.pressure}hPA`;
+            //Append
+            forecastCard.appendChild(forecastDate),forecastCard.appendChild(forecastTemp),forecastCard.appendChild(forecastDescription),forecastCard.appendChild(forecastWind),forecastCard.appendChild(forecastHumidity),forecastCard.appendChild(forecastPressure);
+            forecast.appendChild(forecastCard);
+        }
     },
     // Format City and Country
     formatCityCountry(cityAndCountry) {
