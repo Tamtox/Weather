@@ -4,7 +4,8 @@ const time = document.querySelector('#time');
 const cityName = document.querySelector('#city-name');
 const date = document.querySelector('#date');
 const temperature = document.querySelector('#temperature');
-const description = document.querySelector('#description');
+const descriptionText = document.querySelector('#descriptionText');
+const descriptionIcon = document.querySelector('#descriptionIcon');
 const windDirection = document.querySelector('#wind-direction');
 const windSpeed = document.querySelector('#wind-speed');
 const pressure= document.querySelector('#pressure');
@@ -13,6 +14,7 @@ const info = document.querySelector('#info');
 const forecast = document.querySelector('#forecast');
 const header = document.querySelector('header');
 const toggle = document.querySelector('#toggle');
+const weatherIcon = document.querySelector('#weatherIcon');
 //Storage;
 let dateTimeArr = [];
 let locationArr = [];
@@ -102,7 +104,8 @@ const functions = {
     setWeatherData(res) {
         cityName.innerText = `${res.data.name},${codes[res.data.sys.country]}`;
         temperature.innerText = `${Math.round(res.data.main.temp-273)}°C`;
-        description.innerText = `${res.data.weather[0].description[0].toUpperCase()}${res.data.weather[0].description.slice(1,res.data.weather[0].description.length)}`;
+        descriptionText.innerText = `${res.data.weather[0].description[0].toUpperCase()}${res.data.weather[0].description.slice(1,res.data.weather[0].description.length)}`;
+        descriptionIcon.src  = `http://openweathermap.org/img/wn/${res.data.weather[0].icon}@2x.png`;
         windDirection.innerText = `Wind Direction: ${functions.windDirection(res.data.wind.deg)}`;
         windSpeed.innerText = `Wind Speed:${res.data.wind.speed}m/s`;
         pressure.innerText = `Pressure:${res.data.main.pressure}hPA`;
@@ -115,18 +118,12 @@ const functions = {
             // Create elements 
             const forecastCard = document.createElement('div');
             const [forecastDate,forecastTemp,forecastDescription,forecastWind,forecastHumidity,forecastPressure] = [document.createElement('div'),document.createElement('div'),document.createElement('div'),document.createElement('div'),document.createElement('div'),document.createElement('div')]
-            // const forecastDate  = document.createElement('div');
-            // const forecastTemp = document.createElement('div');
-            // const forecastDescription = document.createElement('div');
-            // const forecastWind = document.createElement('div');
-            // const forecastHumidity = document.createElement('div');
-            // const forecastPressure = document.createElement('div');
             // Set values
             forecastCard.classList.add('forecastCard');
             forecastDate.classList.add('date');
             forecastDate.innerText = element.dt_txt;
             forecastTemp.innerText = `${Math.round(element.main.temp-273)}°C`;
-            forecastDescription.innerText = `${element.weather[0].description[0].toUpperCase()}${element.weather[0].description.slice(1,element.weather[0].description.length)}`;
+            forecastDescription.innerText = `${element.weather[0].description[0].toUpperCase()}${element.weather[0].description.slice(1,element.weather[0].description.length) }`;
             forecastWind.innerText = `Wind: ${functions.windDirection(element.wind.deg)} ${element.wind.speed}m/s`;
             forecastHumidity.innerText = `Humidity:${element.main.humidity}%`;
             forecastPressure.innerText = `Pressure:${element.main.pressure}hPA`;

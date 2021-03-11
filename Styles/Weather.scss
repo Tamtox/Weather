@@ -115,7 +115,7 @@ body {
             @include widthAndHeight(70%,80%);
             padding: 1%;
             display: grid;
-            grid-template-columns: repeat(3,30%);
+            grid-template-columns: repeat(3,31.2%);
             gap: 3%;
             grid-auto-rows:70%;
             margin: auto;
@@ -127,8 +127,8 @@ body {
             transition: opacity 0.5s;
             position: fixed;
             opacity: 0;
-            overflow: scroll;
-            overflow-x: hidden;
+            overflow-y: scroll;
+            scrollbar-width: none;
             .forecastCard {
                 @include widthAndHeight(100%,100%);
                 @include grid(100%,repeat(6,16%));

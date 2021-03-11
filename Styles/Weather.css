@@ -286,8 +286,8 @@ body {
   padding: 1%;
   display: -ms-grid;
   display: grid;
-  -ms-grid-columns: (30%)[3];
-      grid-template-columns: repeat(3, 30%);
+  -ms-grid-columns: (31.2%)[3];
+      grid-template-columns: repeat(3, 31.2%);
   gap: 3%;
   grid-auto-rows: 70%;
   margin: auto;
@@ -302,8 +302,8 @@ body {
   transition: opacity 0.5s;
   position: fixed;
   opacity: 0;
-  overflow: scroll;
-  overflow-x: hidden;
+  overflow-y: scroll;
+  scrollbar-width: none;
 }
 
 #wrapper main #forecast .forecastCard {
